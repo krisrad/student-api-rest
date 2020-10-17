@@ -1,0 +1,100 @@
+logging:
+  path: logs
+
+server:
+  port: 8080
+#  tomcat:
+#    basedir: tomcat
+#    accesslog:
+#      enabled: true
+#      suffix: .log
+#      prefix: access_log
+#      file-date-format: .yyyy-MM-dd
+#      directory: logs
+#      pattern: combined
+#      className: ch.qo.logback.access.tomcat.LogbackValve
+
+spring:
+    profiles:
+        active: mysql
+    application:
+        name: stu-api-rest
+    datasource:
+        url: jdbc:mysql://localhost:3306/studentapirest?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=UTC
+        username: webuser
+        password: aSecretPass
+    jpa:
+        database-platform: org.hibernate.dialect.MySQLInnoDBDialect
+        database: mysql
+        openInView: false
+        show_sql: true
+        generate-ddl: false
+        hibernate:
+            ddl-auto: none
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+    main:
+        log-startup-info: false
+    liquibase:
+        change-log: classpath:db/changelog/db-with-sample-data.xml
+
+---
+
+spring:
+    profiles: h2
+    application:
+        name: stu-api-rest
+    datasource:
+        url: jdbc:h2:mem:studentapirest;DB_CLOSE_DELAY=-1
+        username:
+        password:
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        database: H2
+        openInView: false
+        show_sql: true
+        generate-ddl: false
+        hibernate:
+            ddl-auto: none
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+    main:
+        log-startup-info: false
+    liquibase:
+        change-log: classpath:db/changelog/db-with-sample-data.xml
+
+---
+
+spring:
+    profiles: postgres
+    application:
+        name: stu-api-rest
+    datasource:
+        url: jdbc:postgresql://localhost:5432/studentapirest
+        username: postgres
+        password: postgres
+        driver-class-name: 'org.postgresql.Driver'
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        database: POSTGRESQL
+        openInView: false
+        show_sql: true
+        generate-ddl: false
+        hibernate:
+            ddl-auto: none
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+    main:
+        log-startup-info: false
+    liquibase:
+        change-log: classpath:db/changelog/db-with-sample-data.xml
+

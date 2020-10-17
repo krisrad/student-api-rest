@@ -1,0 +1,51 @@
+<configuration>
+<!--    <springProperty scope="context" name="logDir" source="logging.path"/>-->
+    <property name="logDir" value="logs" />
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+    <timestamp key="byMinute" datePattern="yyyyMMdd'T'HHmm"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) [${springAppName}, %X{X-B3-TraceId:-}] %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logDir}/server.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] [${springAppName}, %X{X-B3-TraceId:-}] %-5level %logger{36}.%M - %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logDir}/archived/server_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${logDir}/applog.log</file>
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Apache Tomcat logs -->
+    <logger name="org.apache.tomcat" level="OFF" />
+    <logger name="org.apache.catalina" level="OFF" />
+
+    <!-- Log Hibernate SQL Statements -->
+    <logger name="org.hibernate.SQL" level="INFO" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="INFO" />
+
+    <logger name="com.demo.studentapirest" level="debug">
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="LOGFILE" />
+    </root>
+
+</configuration>
