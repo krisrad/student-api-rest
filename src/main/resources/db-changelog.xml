@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+
+    <changeSet id="Create ADDRESS table" author="RK">
+        <createTable tableName="ADDRESS">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ADDRESS" />
+            </column>
+            <column name="street" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="city" type="varchar(45)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create STUDENT table" author="RK">
+        <createTable tableName="STUDENT">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_STUDENT" />
+            </column>
+            <column name="first_name" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="last_name" type="varchar(50)" />
+            <column name="email" type="varchar(30)" />
+            <column name="address_id" type="int(11)" />
+        </createTable>
+    </changeSet>
+    <changeSet id="04-create-index-on-table-student" author="RK">
+        <createIndex tableName="STUDENT" indexName="IX_ADDRESS_ID">
+            <column name="address_id" />
+        </createIndex>
+    </changeSet>
+    <changeSet id="Create foreign key on address id" author="RK">
+        <addForeignKeyConstraint baseTableName="STUDENT" baseColumnNames="address_id" constraintName="FK_ADDRESS_ID"
+                                 referencedTableName="ADDRESS" referencedColumnNames="id" />
+    </changeSet>
+
+    <changeSet id="Create SUBJECT table" author="RK">
+        <createTable tableName="SUBJECT">
+            <column name="id" type="int(11)" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SUBJECT" />
+            </column>
+            <column name="subject_name" type="varchar(45)" />
+            <column name="marks_obtained" type="double" />
+            <column name="student_id" type="int(11)" />
+        </createTable>
+    </changeSet>
+    <changeSet id="create-index-on-table-subject" author="RK">
+        <createIndex tableName="SUBJECT" indexName="IX_STUDENT_ID">
+            <column name="student_id" />
+        </createIndex>
+    </changeSet>
+    <changeSet id="Create foreign key on student_id" author="RK">
+        <addForeignKeyConstraint baseTableName="SUBJECT" baseColumnNames="student_id" constraintName="FK_STUDENT_ID"
+                                 referencedTableName="STUDENT" referencedColumnNames="id" />
+    </changeSet>
+
+</databaseChangeLog>

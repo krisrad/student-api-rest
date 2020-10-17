@@ -39,7 +39,7 @@ spring:
     main:
         log-startup-info: false
     liquibase:
-        change-log: classpath:db/changelog/db-with-sample-data.xml
+        change-log: classpath:db-with-sample-data.xml
 
 ---
 
@@ -67,7 +67,7 @@ spring:
     main:
         log-startup-info: false
     liquibase:
-        change-log: classpath:db/changelog/db-with-sample-data.xml
+        change-log: classpath:db-with-sample-data.xml
 
 ---
 
@@ -96,5 +96,5 @@ spring:
     main:
         log-startup-info: false
     liquibase:
-        change-log: classpath:db/changelog/db-with-sample-data.xml
+        change-log: classpath:db-with-sample-data.xml
 

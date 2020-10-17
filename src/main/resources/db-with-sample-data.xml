@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+
+    <include file="db-changelog.xml" />
+
+    <changeSet id="insert ADDRESS" author="RK">
+        <insert tableName="ADDRESS">
+            <column name="street" value="Happy Street" />
+            <column name="city" value="Delhi" />
+        </insert>
+        <insert tableName="ADDRESS">
+            <column name="street" value="2nd Street" />
+            <column name="city" value="Mumbai" />
+        </insert>
+        <insert tableName="ADDRESS">
+            <column name="street" value="3rd Street" />
+            <column name="city" value="Delhi" />
+        </insert>
+        <insert tableName="ADDRESS">
+            <column name="street" value="Any Street" />
+            <column name="city" value="Mumbai" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert student" author="RK">
+        <insert tableName="STUDENT">
+            <column name="first_name" value="John" />
+            <column name="last_name" value="Smith" />
+            <column name="email" value="john@gmail.com" />
+            <column name="address_id" valueComputed="(select id from ADDRESS where street = 'Happy Street' and city='Delhi')" />
+        </insert>
+        <insert tableName="STUDENT">
+            <column name="first_name" value="Virat" />
+            <column name="last_name" value="Dave" />
+            <column name="email" value="virat@gmail.com" />
+            <column name="address_id" valueComputed="(select id from ADDRESS where street = '2nd Street' and city='Mumbai')" />
+        </insert>
+        <insert tableName="STUDENT">
+            <column name="first_name" value="Steve" />
+            <column name="last_name" value="Martin" />
+            <column name="email" value="steve@gmail.com" />
+            <column name="address_id" valueComputed="(select id from ADDRESS where street = '3rd Street' and city='Delhi')" />
+        </insert>
+        <insert tableName="STUDENT">
+            <column name="first_name" value="Sachin" />
+            <column name="last_name" value="Kumar" />
+            <column name="email" value="sachin@gmail.com" />
+            <column name="address_id" valueComputed="(select id from ADDRESS where street = 'Any Street' and city='Mumbai')" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert subjects" author="RK">
+        <insert tableName="SUBJECT">
+            <column name="subject_name" value="Java" />
+            <column name="marks_obtained" valueNumeric="80" />
+            <column name="student_id" valueComputed="(select id from STUDENT where email = 'john@gmail.com')" />
+        </insert>
+        <insert tableName="SUBJECT">
+            <column name="subject_name" value="MySQL" />
+            <column name="marks_obtained" valueNumeric="70" />
+            <column name="student_id" valueComputed="(select id from STUDENT where email = 'john@gmail.com')" />
+        </insert>
+        <insert tableName="SUBJECT">
+            <column name="subject_name" value="Java" />
+            <column name="marks_obtained" valueNumeric="80" />
+            <column name="student_id" valueComputed="(select id from STUDENT where email = 'virat@gmail.com')" />
+        </insert>
+        <insert tableName="SUBJECT">
+            <column name="subject_name" value="MySQL" />
+            <column name="marks_obtained" valueNumeric="70" />
+            <column name="student_id" valueComputed="(select id from STUDENT where email = 'virat@gmail.com')" />
+        </insert>
+        <insert tableName="SUBJECT">
+            <column name="subject_name" value="MongoDB" />
+            <column name="marks_obtained" valueNumeric="70" />
+            <column name="student_id" valueComputed="(select id from STUDENT where email = 'virat@gmail.com')" />
+        </insert>
+        <insert tableName="SUBJECT">
+            <column name="subject_name" value="MySQL" />
+            <column name="marks_obtained" valueNumeric="70" />
+            <column name="student_id" valueComputed="(select id from STUDENT where email = 'steve@gmail.com')" />
+        </insert>
+        <insert tableName="SUBJECT">
+            <column name="subject_name" value="MongoDB" />
+            <column name="marks_obtained" valueNumeric="70" />
+            <column name="student_id" valueComputed="(select id from STUDENT where email = 'steve@gmail.com')" />
+        </insert>
+        <insert tableName="SUBJECT">
+            <column name="subject_name" value="Java" />
+            <column name="marks_obtained" valueNumeric="60" />
+            <column name="student_id" valueComputed="(select id from STUDENT where email = 'sachin@gmail.com')" />
+        </insert>
+        <insert tableName="SUBJECT">
+            <column name="subject_name" value="MongoDB" />
+            <column name="marks_obtained" valueNumeric="50" />
+            <column name="student_id" valueComputed="(select id from STUDENT where email = 'sachin@gmail.com')" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
