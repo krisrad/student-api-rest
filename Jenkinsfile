@@ -1,8 +1,7 @@
 pipeline {
     agent any
-    scm checkout
     tools {
-        maven "M3"
+        maven "jenkins-maven"
     }
     stages {
         stage ('Compile java project') {
