@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo "My first pipeline"'
+                sh '''
+                    echo "I can do more here..."
+                    ls -alh
+                '''
+                sh '''
+                    echo "show tree view"
+                    tree
+                '''
+            }
+        }
+    }
+}

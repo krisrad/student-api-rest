@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    stages {
+        stage('timeout') {
+            steps {
+                retry(3) {
+                    bat 'echo hello'
+                }
+                timeout(time:3, unit: 'SECONDS') {
+                    bat 'echo sleeping for 5 seconds..'
+                    sh 'sleep 5'
+                }
+            }
+        }
+    }
+}

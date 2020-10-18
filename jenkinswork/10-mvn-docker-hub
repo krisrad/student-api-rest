@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    scm checkout
     tools {
         maven "M3"
     }
@@ -17,7 +16,7 @@ pipeline {
         }
         stage ('docker build and push to dockerhub') {
             steps {
-                sh 'echo pushing to dockerhub'
+
             }
         }
     }

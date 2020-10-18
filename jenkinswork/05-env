@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    environment {
+        NAME = 'ricardo'
+        LASTNAME = 'gonzales'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo $NAME $LASTNAME'
+            }
+        }
+    }
+}
