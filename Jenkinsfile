@@ -7,12 +7,12 @@ pipeline {
     stages {
         stage ('Compile java project') {
             steps {
-                mvn compile
+                bat "mvn compile"
             }
         }
         stage ('Package jar file') {
             steps {
-                mvn -DskipTests clean package
+                bat "mvn -DskipTests clean package"
             }
         }
         stage ('docker build and push to dockerhub') {
