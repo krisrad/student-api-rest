@@ -14,7 +14,7 @@ pipeline {
                 bat "mvn -DskipTests clean package"
             }
         }
-        stage ('docker build and push to dockerhub') {
+        stage ('docker build and push to ecr') {
             steps {
                 sh 'echo pushing to dockerhub'
                 script {
