@@ -17,6 +17,12 @@ pipeline {
         stage ('docker build and push to dockerhub') {
             steps {
                 sh 'echo pushing to dockerhub'
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                        docker.build("rmeiappan/student-api-rest", '.').push()
+                    }
+                }
+
             }
         }
     }
