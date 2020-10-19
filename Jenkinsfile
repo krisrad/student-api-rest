@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh 'echo pushing to dockerhub'
                 script {
-                    docker.withRegistry('404522240888.dkr.ecr.us-east-1.amazonaws.com/student-api-rest', 'ecr:us-east-1:aws_administrator') {
+                    docker.withRegistry('https://404522240888.dkr.ecr.us-east-1.amazonaws.com/student-api-rest', 'ecr:us-east-1:aws_administrator') {
                         docker.build("student-api-rest", '.').push('latest')
                     }
                 }
